@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Odra ♡</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+overflow:hidden;
+background:linear-gradient(135deg,#ffd6e7,#d6e8ff,#fff3b3,#e8d7ff);
+background-size:400% 400%;
+animation:bg 10s ease infinite;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+.page{
+display:none;
+height:100vh;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+
+.active{display:flex;}
+
+h1{color:white;text-shadow:0 3px 10px rgba(0,0,0,.2)}
+
+input{
+padding:15px;
+border:none;
+border-radius:20px;
+text-align:center;
+}
+
+button{
+margin-top:15px;
+padding:12px 25px;
+border:none;
+border-radius:999px;
+background:#ff9ec8;
+color:white;
+cursor:pointer;
+}
+
+#board{
+display:grid;
+grid-template-columns:repeat(5,50px);
+gap:5px;
+margin-top:20px;
+}
+
+.block{
+width:50px;height:50px;
+background:white;
+border-radius:10px;
+cursor:pointer;
+transition:.2s;
+}
+
+.heart,.spark{
+position:fixed;
+font-size:18px;
+animation:float 4s linear forwards;
+}
+
+@keyframes float{
+to{transform:translateY(-120vh);opacity:0}
+}
+
+#letter{
+white-space:pre-line;
+color:white;
+max-width:80%;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PIN -->
+<div id="pinPage" class="page active">
+<h1>Odra sayanggg ♡</h1>
+<p>masukin tanggal kita 💗</p>
+<input id="pin" placeholder="25426">
+<button onclick="checkPin()">Unlock</button>
+<p id="msg"></p>
+</div>
+
+<!-- GAME -->
+<div id="gamePage" class="page">
+<h1>Mini Game 💗</h1>
+<div id="board"></div>
+<button id="nextBtn" style="display:none" onclick="goQuiz()">Next ♡</button>
+</div>
+
+<!-- QUIZ -->
+<div id="quizPage" class="page">
+<h1>kamu sayang aku gaaa?</h1>
+<button onclick="wrong()">Engga</button>
+<button onclick="wrong()">Sayang</button>
+<button onclick="love()">Sayang banget 💕</button>
+<p id="quizMsg"></p>
+</div>
+
+<!-- HEART -->
+<div id="heartPage" class="page">
+<h1>pencet ❤️</h1>
+<button onclick="openLetter()">❤️</button>
+</div>
+
+<!-- LETTER -->
+<div id="letterPage" class="page">
+<h1>for odra ♡</h1>
+<p id="letter"></p>
+</div>
+
+<script>
+
+function show(id){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+// PIN
+function checkPin(){
+if(document.getElementById("pin").value==="25426"){
+show("gamePage");
+startGame();
+}else{
+document.getElementById("msg").innerText="coba inget lagi yaa 🤭💗";
+}
+}
+
+// GAME
+let filled=0;
+
+function startGame(){
+let board=document.getElementById("board");
+board.innerHTML="";
+filled=0;
+
+for(let i=0;i<25;i++){
+let b=document.createElement("div");
+b.className="block";
+
+b.onclick=()=>{
+if(!b.classList.contains("done")){
+b.classList.add("done");
+b.style.background=randomColor();
+filled++;
+
+if(filled===20){
+document.getElementById("nextBtn").style.display="block";
+burst();
+}
+}
+};
+
+board.appendChild(b);
+}
+}
+
+function randomColor(){
+let c=["#ffd6e7","#d6e8ff","#fff3b3","#e8d7ff","#d7ffe8"];
+return c[Math.floor(Math.random()*c.length)];
+}
+
+function goQuiz(){
+show("quizPage");
+}
+
+function wrong(){
+document.getElementById("quizMsg").innerText="bukan itu jawabannya 😭💔";
+}
+
+function love(){
+show("heartPage");
+}
+
+// LETTER
+function openLetter(){
+show("letterPage");
+
+let text=`odra sayanggg ♡
+
+aku ga tau harus mulai dari mana, tapi aku pengen kamu baca ini pelan-pelan ya.
+
+makasih ya udah jadi kamu.
+
+aku mungkin bukan orang yang paling sempurna buat kamu,
+aku juga kadang masih suka bingung, overthinking, atau tiba-tiba diem sendiri.
+
+tapi satu hal yang aku yakin banget...
+
+aku sayang kamu.
+
+bukan yang cuma lewat,
+bukan yang cuma pas lagi seneng,
+tapi yang bener-bener ada walaupun kadang kita sama-sama capek atau ga ngerti satu sama lain.
+
+kamu itu bukan cuma orang yang aku suka,
+kamu itu tempat aku balik.
+
+tempat aku cerita hal-hal kecil,
+tempat aku ngerasa tenang walaupun dunia lagi berantakan.
+
+kalau nanti aku lagi ga banyak ngomong,
+atau keliatan jauh,
+tolong jangan langsung mikir yang buruk ya...
+
+aku tetap di sini.
+aku tetap peduli.
+aku tetap sayang.
+
+aku cuma kadang lagi berantem sama pikiranku sendiri.
+
+dan hari ini...
+
+aku cuma mau kamu ngerasa dicintai.
+
+bener-bener dicintai.
+
+happy birthday odra ♡
+
+makasih udah lahir ke dunia ini,
+makasih udah jadi alasan aku senyum di banyak hari,
+makasih udah bertahan sampai sejauh ini.
+
+aku harap kamu selalu dikelilingi hal baik,
+orang-orang yang sayang kamu beneran,
+dan hari-hari yang bikin kamu ngerasa cukup.
+
+dan kalo suatu saat kamu ngerasa ga cukup...
+
+aku harap kamu inget ini:
+
+kamu cukup.
+kamu berharga.
+dan kamu disayang.
+
+termasuk sama aku.
+
+selalu.
+
+— dari aku ♡`;
+let i=0;
+let el=document.getElementById("letter");
+el.innerHTML="";
+
+let t=setInterval(()=>{
+el.innerHTML+=text[i];
+i++;
+if(i>=text.length){
+clearInterval(t);
+hearts();
+}
+},30);
+}
+
+// EFFECTS
+function hearts(){
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerText="💗";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),4000);
+},200);
+}
+
+function burst(){
+for(let i=0;i<40;i++){
+let s=document.createElement("div");
+s.className="spark";
+s.innerText="✨";
+s.style.left=Math.random()*100+"vw";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),3000);
+}
+}
+
+</script>
+
+</body>
+</html>
