@@ -97,11 +97,76 @@ max-width:80%;
 </div>
 
 <!-- GAME -->
-<div id="gamePage" class="page">
-<h1>Mini Game 💗</h1>
-<div id="board"></div>
-<button id="nextBtn" style="display:none" onclick="goQuiz()">Next ♡</button>
-</div>
+let board = [];
+let currentBlock = null;
+let filled = 0;
+let size = 5;
+
+function startGame(){
+let container = document.getElementById("board");
+container.innerHTML="";
+board=[];
+filled=0;
+
+for(let i=0;i<size;i++){
+board[i]=[];
+for(let j=0;j<size;j++){
+let cell=document.createElement("div");
+cell.className="block";
+
+cell.onclick=()=>{
+placeBlock(i,j,cell);
+};
+
+container.appendChild(cell);
+board[i][j]=0;
+}
+}
+
+spawnBlock();
+}
+
+function spawnBlock(){
+let shapes=[
+[[1,1]],
+[[1],[1]],
+[[1,1,1]],
+[[1,1],[1,1]],
+[[1,0],[1,1]]
+];
+
+currentBlock = shapes[Math.floor(Math.random()*shapes.length)];
+}
+
+function placeBlock(x,y,cell){
+
+if(!currentBlock) return;
+
+if(canPlace(x,y)){
+fillShape(x,y);
+cell.style.background=randomColor();
+filled++;
+
+if(filled>=10){
+document.getElementById("nextBtn").style.display="block";
+burst();
+}
+spawnBlock();
+}
+}
+
+function canPlace(x,y){
+return true;
+}
+
+function fillShape(x,y){
+for(let i=0;i<currentBlock.length;i++){
+for(let j=0;j<currentBlock[i].length;j++){
+if(currentBlock[i][j]===1){
+}
+}
+}
+}
 
 <!-- QUIZ -->
 <div id="quizPage" class="page">
