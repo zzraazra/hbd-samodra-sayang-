@@ -97,30 +97,33 @@ max-width:80%;
 </div>
 
 <!-- GAME -->
-let filled = 0;
-let target = 12;
+<let filled = 0;
+let target = 15;
 
 function startGame(){
 let board=document.getElementById("board");
-board.innerHTML="";
-filled=0;
+<board.innerHTML="";
+<filled=0;
 
-for(let i=0;i<25;i++){
+<for(let i=0;i<25;i++){
 let b=document.createElement("div");
-b.className="block";
+<b.className="block";
 
-b.onclick=()=>{
-if(!b.classList.contains("done")){
-b.classList.add("done");
-b.style.background=randomColor();
-filled++;
+<b.onclick=()=>{
+<if(!b.classList.contains("done")){
+<b.classList.add("done");
 
-b.style.transform="scale(1.1)";
+<let colors=["#ffd6e7","#d6e8ff","#fff3b3","#e8d7ff","#d7ffe8"];
+<b.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+<filled++;
+
+b.style.transform="scale(1.15)";
 setTimeout(()=>b.style.transform="scale(1)",150);
 
-if(filled>=target){
-document.getElementById("nextBtn").style.display="block";
-burst();
+<if(filled>=target){
+<document.getElementById("nextBtn").style.display="block";
+<burst();
 }
 }
 };
@@ -130,10 +133,8 @@ board.appendChild(b);
 }
 
 function randomColor(){
-let c=["#ffd6e7","#d6e8ff","#fff3b3","#e8d7ff","#d7ffe8"];
-return c[Math.floor(Math.random()*c.length)];
+return "#ffffff";
 }
-
 <!-- QUIZ -->
 <div id="quizPage" class="page">
 <h1>kamu sayang aku gaaa?</h1>
