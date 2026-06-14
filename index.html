@@ -331,6 +331,18 @@ show("quizPage");
 
 function testJump(){
 show("jumpscarePage");
+
+let steps = document.querySelectorAll("#jumpscarePage .step");
+
+steps.forEach(el=>{
+el.classList.remove("show");
+});
+
+steps.forEach((el,index)=>{
+setTimeout(()=>{
+el.classList.add("show");
+}, index*1000);
+});
 }
 
 function wrong(){
