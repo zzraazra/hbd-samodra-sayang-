@@ -118,35 +118,15 @@ font-size:20px;
 }
 audio{display:none;}
 
-  .step{
+.step{
 opacity:0;
-animation:muncul .8s forwards;
+transform:translateY(20px);
+transition:1s;
 }
 
-.step:nth-child(1){
-animation-delay:0s;
-}
-
-.step:nth-child(2){
-animation-delay:1s;
-}
-
-.step:nth-child(3){
-animation-delay:2s;
-}
-
-.step:nth-child(4){
-animation-delay:3s;
-}
-
-.step:nth-child(5){
-animation-delay:4s;
-}
-
-@keyframes muncul{
-to{
+.step.show{
 opacity:1;
-}
+transform:translateY(0);
 }
 </style>
 </head>
