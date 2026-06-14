@@ -9,7 +9,8 @@
 body{
 margin:0;
 font-family:Arial;
-overflow:hidden;
+overflow-x:hidden;
+overflow-y:auto;
 background:linear-gradient(135deg,#ffd6e7,#d6e8ff,#fff3b3,#e8d7ff);
 background-size:400% 400%;
 animation:bg 10s ease infinite;
@@ -23,15 +24,21 @@ animation:bg 10s ease infinite;
 
 .page{
 display:none;
-height:100vh;
+min-height:100vh;
 justify-content:center;
 align-items:center;
 flex-direction:column;
 text-align:center;
 padding:20px;
+overflow-y:auto;
+box-sizing:border-box;
 }
 
 .active{display:flex;}
+
+#jumpscarePage{
+overflow-y:auto;
+}
 
 h1{color:white;text-shadow:0 3px 10px rgba(0,0,0,.2)}
 
@@ -149,6 +156,9 @@ Next ♡
 <div id="jumpscarePage" class="page" style="
 background:linear-gradient(135deg,#ffd6e7,#d6e8ff,#fff3b3,#e8d7ff);
 color:#6d5b74;
+padding-top:60px;
+padding-bottom:60px;
+overflow-y:auto;
 ">
 
 <h1 style="font-size:50px;">🚨 ALERT 🚨</h1>
