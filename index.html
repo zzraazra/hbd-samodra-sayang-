@@ -146,7 +146,7 @@ audio{display:none;}
 <div id="gamePage" class="page">
 <h1>Mini Game 💗</h1>
 <div id="board"></div>
-<button id="nextBtn" style="display:none" onclick="show('jumpscarePage')">
+<button id="nextBtn" style="display:none" onclick="testJump()">
 Next ♡
 </button>
 
@@ -316,6 +316,18 @@ return c[Math.floor(Math.random()*c.length)];
 
 function goQuiz(){
 show("quizPage");
+}
+
+function testJump(){
+alert("masuk");
+
+show("jumpscarePage");
+
+alert("selesai");
+}
+
+function wrong(){
+document.getElementById("quizMsg").innerText="bukan itu jawabannya 😭 coba lagi yaa";
 }
 
 function wrong(){
