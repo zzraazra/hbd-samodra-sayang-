@@ -174,7 +174,6 @@ transform:scale(1);
 opacity:1;
 }
 
-}
   #gameArea{
 position:relative;
 width:100%;
@@ -197,6 +196,7 @@ to{
 top:450px;
 }
 }
+  
   .plusOne{
 position:absolute;
 font-size:20px;
@@ -211,11 +211,13 @@ opacity:1;
 transform:translateY(0);
 }
 
+}
+
 100%{
 opacity:0;
 transform:translateY(-40px);
 }
-}
+
 </style>
 </head>
 
@@ -376,7 +378,7 @@ document.getElementById("bgm").play();
 }else{
 document.getElementById("msg").innerText="coba inget lagi yaa 🤭💗";
 }
-}
+
 
 // =====================
 // GAME (STABIL + FUN)
@@ -584,7 +586,7 @@ s.style.left=Math.random()*100+"vw";
 document.body.appendChild(s);
 setTimeout(()=>s.remove(),3000);
 }
-}
+
 
 function closeGift(){
 
@@ -593,7 +595,6 @@ document.getElementById("giftBox").style.display = "none";
 testJump();
 
 }
-}  
 
 </script>
 
