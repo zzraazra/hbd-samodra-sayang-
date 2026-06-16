@@ -128,6 +128,94 @@ transition:1s;
 opacity:1;
 transform:translateY(0);
 }
+#giftBox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.25);
+
+display:none;
+justify-content:center;
+align-items:center;
+
+z-index:999;
+}
+
+#giftCard{
+background:white;
+padding:35px;
+border-radius:30px;
+width:280px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+animation:popGift .5s;
+}
+
+#giftCard h2{
+color:#ff7eb6;
+}
+
+#giftCard p{
+color:#6d5b74;
+line-height:1.8;
+}
+
+@keyframes popGift{
+
+0%{
+transform:scale(.5);
+opacity:0;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+  #gameArea{
+position:relative;
+width:100%;
+height:400px;
+overflow:hidden;
+}
+
+.love{
+position:absolute;
+font-size:35px;
+cursor:pointer;
+animation:fall 5s linear forwards;
+}
+
+@keyframes fall{
+from{
+top:-50px;
+}
+to{
+top:450px;
+}
+}
+  .plusOne{
+position:absolute;
+font-size:20px;
+color:#ff7eb6;
+animation:pop 1s forwards;
+pointer-events:none;
+}
+
+@keyframes pop{
+0%{
+opacity:1;
+transform:translateY(0);
+}
+
+100%{
+opacity:0;
+transform:translateY(-40px);
+}
+}
 </style>
 </head>
 
@@ -155,13 +243,22 @@ transform:translateY(0);
 
 <!-- GAME -->
 <div id="gamePage" class="page">
-<h1>Mini Game 💗</h1>
-<div id="board"></div>
-<button id="nextBtn" style="display:none" onclick="testJump()">
-Next ♡
+
+<h1>Collect Love 💗</h1>
+
+<h2>kumpulkan 20 love dari pacarmu 🤭💗</h2>
+
+<h1 id="score">0 / 20</h1>
+
+<div id="gameArea"></div>
+
+<button id="nextBtn"
+style="display:none"
+onclick="testJump()">
+claim hadiah 🎁
 </button>
 
-  </div>
+</div>
 
   <!-- JUMPSCARE GEMES -->
 <div id="jumpscarePage" class="page" style="
@@ -288,42 +385,91 @@ document.getElementById("msg").innerText="coba inget lagi yaa 🤭💗";
 // =====================
 // GAME (STABIL + FUN)
 // =====================
-let filled = 0;
-let target = 18;
+let loveInterval;
+let score = 0;
+let target = 20;
 
 function startGame(){
-let board=document.getElementById("board");
-board.innerHTML="";
-filled=0;
 
-for(let i=0;i<25;i++){
-let b=document.createElement("div");
-b.className="block";
+score = 0;
 
-b.onclick=()=>{
-if(!b.classList.contains("done")){
-b.classList.add("done");
-b.style.background=randomColor();
+document.getElementById("score").innerText = "0 / 20";
 
-filled++;
+document.getElementById("gameArea").innerHTML = "";
 
-b.style.transform="scale(1.15)";
-setTimeout(()=>b.style.transform="scale(1)",150);
+document.getElementById("nextBtn").style.display = "none";
 
-if(filled>=target){
-document.getElementById("nextBtn").style.display="block";
-burst();
+loveInterval = setInterval(createLove,800);
+
 }
+
+function createLove(){
+
+if(score >= target){
+return;
+}
+
+let love = document.createElement("div");
+
+love.className = "love";
+
+let emoji = ["💗","🩷","💕","🤍"];
+
+love.innerText =
+emoji[Math.floor(Math.random()*emoji.length)];
+
+love.style.left = Math.random()*85 + "%";
+
+love.onclick = ()=>{
+
+score++;
+
+let text = document.createElement("div");
+
+text.className = "plusOne";
+
+text.innerText = "+1 love 💕";
+
+text.style.left = love.style.left;
+
+text.style.top = love.offsetTop + "px";
+
+document.getElementById("gameArea").appendChild(text);
+
+setTimeout(()=>{
+text.remove();
+},1000);
+
+document.getElementById("score").innerText =
+score + " / " + target;
+
+love.remove();
+
+if(score >= target){
+
+clearInterval(loveInterval);
+
+burst();
+
+hearts();
+
+setTimeout(()=>{
+
+document.getElementById("giftBox").style.display = "flex";
+
+},1000);
+
+}
+
 }
 };
 
-board.appendChild(b);
-}
-}
+document.getElementById("gameArea").appendChild(love);
 
-function randomColor(){
-let c=["#ffd6e7","#d6e8ff","#fff3b3","#e8d7ff","#d7ffe8"];
-return c[Math.floor(Math.random()*c.length)];
+setTimeout(()=>{
+love.remove();
+},5000);
+
 }
 
 function goQuiz(){
@@ -447,7 +593,32 @@ setTimeout(()=>s.remove(),3000);
 }
 }
 
+function closeGift(){
+
+document.getElementById("giftBox").style.display = "none";
+
+document.getElementById("nextBtn").style.display = "block";
+
+}    
+
 </script>
 
+<div id="giftBox">
+
+<div id="giftCard">
+
+<h2>selamattt!! 🥹💗</h2>
+
+<p>
+kamu berhasil mengumpulkan seluruh cintaku 🤭🌷
+</p>
+
+<button onclick="closeGift()">
+claim hadiah 🎁
+</button>
+
+</div>
+
+</div>
 </body>
 </html>
