@@ -253,12 +253,8 @@ transform:translateY(-40px);
 <div id="gameArea"></div>
 
 <button id="nextBtn"
-style="display:none"
-onclick="testJump()">
-claim hadiah 🎁
-</button>
 
-</div>
+  </div>
 
   <!-- JUMPSCARE GEMES -->
 <div id="jumpscarePage" class="page" style="
@@ -397,8 +393,6 @@ document.getElementById("score").innerText = "0 / 20";
 
 document.getElementById("gameArea").innerHTML = "";
 
-document.getElementById("nextBtn").style.display = "none";
-
 loveInterval = setInterval(createLove,800);
 
 }
@@ -461,7 +455,6 @@ document.getElementById("giftBox").style.display = "flex";
 
 }
 
-}
 };
 
 document.getElementById("gameArea").appendChild(love);
@@ -597,9 +590,10 @@ function closeGift(){
 
 document.getElementById("giftBox").style.display = "none";
 
-document.getElementById("nextBtn").style.display = "block";
+testJump();
 
-}    
+}
+}  
 
 </script>
 
